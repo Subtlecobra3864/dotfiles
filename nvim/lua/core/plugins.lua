@@ -16,6 +16,7 @@ local plugins = {
 
   -- Theme
   {
+          'Shatur/neovim-ayu',
           'Mofiqul/vscode.nvim',
           'doums/darcula',
           'Morhetz/gruvbox',

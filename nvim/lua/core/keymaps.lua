@@ -11,7 +11,9 @@ vim.opt.expandtab = true
 
 -- general QOL settings, line numbers, etc
 vim.cmd[[set number]]
+vim.cmd[[set ruler]]
 vim.cmd[[set nowrap]]
+vim.cmd[[set colorcolumn=80]]
 vim.cmd([[
 set whichwrap+=<,>,[,]
 ]])

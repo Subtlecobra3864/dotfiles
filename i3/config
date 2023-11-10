@@ -223,7 +223,7 @@ set $black #1e2127
 #    }
 #}
 
-gaps inner 20px
+gaps inner 10px
 gaps outer 10px
 default_border none
 
