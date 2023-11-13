@@ -58,6 +58,9 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 " fzf in runtimepath
 set rtp+=/usr/local/opt/fzf
 
+" Use ripgrep as grep
+set grepprg=rg\ --vimgrep\ --smart-case\ --follow
+
 " C-p: FZF find files
 nnoremap <silent> <C-p> :Files<CR>
 
