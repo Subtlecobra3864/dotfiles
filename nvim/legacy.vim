@@ -25,9 +25,9 @@ set visualbell
 set nowrap
 
 " Indentation
-set tabstop=4
-set softtabstop=4
 set noexpandtab
+set tabstop=4
+set shiftwidth=4
 set autoindent
 set smartindent
 
@@ -52,8 +52,17 @@ set nowritebackup
 " That bar thing that goes next to line numbers
 set signcolumn=yes
 
+
+" easy-motion
+" disable default mappings, turn on case-insensitivity
+let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_smartcase = 1
+
 " enable history for fzf
 let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+" move to start of line when jumping lines
+let g:EasyMotion_startofline = 1
 
 " fzf in runtimepath
 set rtp+=/usr/local/opt/fzf
@@ -76,3 +85,49 @@ nnoremap <silent> <leader>g viw:lua require('spectre').open_file_search()<CR>
 " <leader>s: symbols outline
 nnoremap <silent> <leader>s :SymbolsOutline<CR>
 
+" Customize fzf colors to match your color scheme
+" - fzf#wrap translates this to a set of `--color` options
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+\ 'bg':      ['bg', 'Normal'],
+\ 'hl':      ['fg', 'Comment'],
+\ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+\ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+\ 'hl+':     ['fg', 'Statement'],
+\ 'info':    ['fg', 'PreProc'],
+\ 'border':  ['fg', 'Ignore'],
+\ 'prompt':  ['fg', 'Conditional'],
+\ 'pointer': ['fg', 'Exception'],
+\ 'marker':  ['fg', 'Keyword'],
+\ 'spinner': ['fg', 'Label'],
+\ 'header':  ['fg', 'Comment'] }
+
+
+" Function to trim extra whitespace in whole file
+function! Trim()
+  let l:save = winsaveview()
+  keeppatterns %s/\s\+$//e
+  call winrestview(l:save)
+endfun
+
+command! -nargs=0 Trim call Trim()
+
+" auto-pairs
+let g:AutoPairsFlyMode = 0
+let g:AutoPairsShortcutBackInsert = '<M-b>'
+
+
+" colorcolumn 80 when opening C/C++
+autocmd BufRead,BufNewFile *.c setlocal colorcolumn=80
+autocmd BufRead,BufNewFile *.h setlocal colorcolumn=80
+autocmd BufRead,BufNewFile *.cpp setlocal colorcolumn=80
+autocmd BufRead,BufNewFile *.hpp setlocal colorcolumn=80
+autocmd BufRead,BufNewFile *.c set tabstop=4
+autocmd BufRead,BufNewFile *.h set tabstop=4
+autocmd BufRead,BufNewFile *.cpp set tabstop=4
+autocmd BufRead,BufNewFile *.hpp set tabstop=4
+" C/C++ indent options: fix extra indentation on function continuation
+set cino=(0,W4
+
+" colorcolumn 80, tab width 4 for shaders
+autocmd BufRead,BufNewFile *.sc setlocal colorcolumn=80 | SetTab 4
